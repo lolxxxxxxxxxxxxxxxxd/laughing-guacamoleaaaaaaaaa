@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Stash</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 35px;
+    background: #0b0b10;
+    color: #eeeef5;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    margin-bottom: 5px;
+    font-size: 34px;
+}
+
+h1 span {
+    color: #a78bfa;
+}
+
+p {
+    color: #9292a8;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.input-area {
+    margin: 25px 0;
+    padding: 20px;
+    background: #15151f;
+    border: 1px solid #292938;
+    border-radius: 12px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    resize: vertical;
+    background: #0c0c13;
+    color: white;
+    border: 1px solid #353547;
+    border-radius: 8px;
+    font: inherit;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #8b5cf6;
+}
+
+#videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+}
+
+.video {
+    overflow: hidden;
+    background: #15151f;
+    border: 1px solid #292938;
+    border-radius: 12px;
+}
+
+.video iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
+.video-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px;
+}
+
+.video-info a {
+    color: #a78bfa;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.video-info button {
+    margin: 0;
+    padding: 7px 10px;
+    background: #29202d;
+    color: #fda4af;
+}
+
+#status {
+    color: #a78bfa;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>video stash<span>.</span></h1>
+    <p>Save YouTube links and watch them here whenever you want.</p>
+
+    <div class="input-area">
+        <textarea id="links" placeholder="Paste YouTube links here, one per line..."></textarea>
+        <button onclick="addVideos()">Add videos</button>
+        <button onclick="document.getElementById('links').value=''"
+                style="background:#292938">Clear</button>
+        <div id="status"></div>
+    </div>
+
+    <h2>Saved videos</h2>
+    <div id="videos"></div>
+</div>
+
+<script>
+const storageKey = "video-stash-videos-html";
+let saved = [];
+
+try {
+    saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    if (!Array.isArray(saved)) saved = [];
+} catch {
+    saved = [];
+}
+
+function getId(link) {
+    try {
+        const url = new URL(link);
+        const host = url.hostname.replace(/^(www\.|m\.)/, "");
+        let id = "";
+
+        if (host === "youtu.be") {
+            id = url.pathname.split("/").filter(Boolean)[0] || "";
+        } else if (host === "youtube.com" ||
+                   host === "youtube-nocookie.com") {
+            if (url.pathname === "/watch") {
+                id = url.searchParams.get("v") || "";
+            } else {
+                const parts = url.pathname.split("/").filter(Boolean);
+                if (["embed", "shorts", "live"].includes(parts[0])) {
+                    id = parts[1] || "";
+                }
+            }
+        }
+
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
+    } catch {
+        return null;
+    }
+}
+
+function addVideos() {
+    const input = document.getElementById("links");
+    const status = document.getElementById("status");
+    const links = input.value.split(/\s+/).filter(Boolean);
+
+    if (!links.length) {
+        status.textContent = "Paste a link first.";
+        return;
+    }
+
+    let added = 0;
+    let invalid = 0;
+
+    for (const link of links) {
+        const id = getId(link);
+
+        if (!id) {
+            invalid++;
+            continue;
+        }
+
+        if (saved.some(video => video.id === id)) continue;
+
+        saved.unshift({ id });
+        added++;
+    }
+
+    localStorage.setItem(storageKey, JSON.stringify(saved));
+    input.value = "";
+    render();
+
+    status.textContent = `${added} video(s) added.` +
+        (invalid ? ` ${invalid} invalid link(s) skipped.` : "");
+}
+
+function removeVideo(id) {
+    saved = saved.filter(video => video.id !== id);
+    localStorage.setItem(storageKey, JSON.stringify(saved));
+    render();
+}
+
+function render() {
+    const container = document.getElementById("videos");
+    container.replaceChildren();
+
+    if (!saved.length) {
+        container.textContent = "No videos saved yet.";
+        container.style.color = "#9292a8";
+        return;
+    }
+
+    container.style.color = "";
+
+    for (const video of saved) {
+        const card = document.createElement("div");
+        card.className = "video";
+
+        const frame = document.createElement("iframe");
+        frame.src = `https://www.youtube-nocookie.com/embed/${video.id}`;
+        frame.title = "YouTube video";
+        frame.loading = "lazy";
+        frame.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+
+        const info = document.createElement("div");
+        info.className = "video-info";
+
+        const link = document.createElement("a");
+        link.href = `https://www.youtube.com/watch?v=${video.id}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Open on YouTube ↗";
+
+        const remove = document.createElement("button");
+        remove.textContent = "Remove";
+        remove.onclick = () => removeVideo(video.id);
+
+        info.append(link, remove);
+        card.append(frame, info);
+        container.append(card);
+    }
+}
+
+document.getElementById("links").addEventListener("keydown", event => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        addVideos();
+    }
+});
+
+render();
+</script>
+</body>
+</html>
