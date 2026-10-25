@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101112">
+    <meta name="description" content="Learn modern C++, build projects, and explore Windows systems and defensive security.">
+    <title>OFFSET — C++ from source to system</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="./assets/js/app.js" defer></script>
+    <script src="./assets/js/lessons-data.js" defer></script>
+    <script src="./assets/js/curriculum-data.js" defer></script>
+    <script src="./assets/js/home.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+        <nav class="main-nav" id="site-nav" aria-label="Main navigation">
+          <a href="./index.html" aria-current="page">Overview</a>
+          <a href="./learn.html">Learn</a>
+          <a href="./compiler.html">Compiler</a>
+          <a href="./projects.html">Projects</a>
+          <a href="./systems.html">Windows</a>
+          <a href="./security.html">Security</a>
+          <a href="./reference.html">Reference</a>
+        </nav>
+        <div class="header-tools">
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button>
+          <a class="header-cta" href="./compiler.html">Open compiler <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="home-hero">
+        <div class="shell home-hero-grid">
+          <div class="home-hero-copy">
+            <p class="eyebrow"><span class="eyebrow-mark"></span>C++ · SYSTEMS · SECURITY</p>
+            <h1>Understand C++.<br>See what it does.</h1>
+            <p class="hero-description">Start with the language. Follow it into memory, Windows APIs, and defensive security. Learn a concept, write code, and see the compiler respond.</p>
+            <div class="hero-buttons">
+              <a class="button button-primary" href="./learn.html">Browse the lessons</a>
+              <a class="button button-secondary" href="./compiler.html">Open the compiler</a>
+            </div>
+            <div class="home-facts"><span id="home-module-count">Eight learning tracks</span><i></i><span>C + C++ IDE</span><i></i><span>Progress saved locally</span></div>
+          </div>
+
+          <figure class="address-board">
+            <figcaption class="address-board-head"><span>Process map</span><span>schematic · 64-bit</span></figcaption>
+            <div class="address-source"><code>int score{42};</code><span>one local object</span></div>
+            <div class="address-regions" aria-label="Simplified process memory regions">
+              <div class="address-region region-stack"><span>0x7FFF ····</span><strong>Stack</strong><code>score = 42</code></div>
+              <div class="address-gap"><span>···· ····</span><span>unused address space</span></div>
+              <div class="address-region region-heap"><span>0x0040 ····</span><strong>Heap</strong><code>dynamic lifetime</code></div>
+              <div class="address-region region-data"><span>0x0040 ····</span><strong>Static data</strong><code>global objects</code></div>
+              <div class="address-region region-code"><span>0x0000 ····</span><strong>Program code</strong><code>instructions</code></div>
+            </div>
+            <p class="address-board-foot">Addresses and layout are illustrative.</p>
+          </figure>
+        </div>
+      </section>
+
+      <section class="home-sequence" aria-label="Learning path">
+        <div class="shell sequence-inner"><span>Follow the trail</span><b>Language</b><i>/</i><b>Lifetime</b><i>/</i><b>Operating system</b><i>/</i><b>Defensive analysis</b></div>
+      </section>
+
+      <section class="section route-section" aria-labelledby="route-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div><p class="section-kicker">Choose a workspace</p><h2 id="route-title">What do you want to do?</h2></div>
+            <p>Each area has its own page and tools. Move between the course, compiler, project ideas, and systems notes without losing your place.</p>
+          </div>
+          <div class="workspace-grid">
+            <a class="workspace-item workspace-learn" href="./learn.html"><span class="workspace-index">01 / LEARN</span><h3>Build the mental model.</h3><p>Study C and C++ fundamentals, then follow the ideas into memory and machine code.</p><span class="workspace-link">Browse the library <b>↗</b></span></a>
+            <a class="workspace-item workspace-compiler" href="./compiler.html"><span class="workspace-index">02 / IDE</span><h3>Write across files.</h3><p>Create projects, folders, and C/C++ files; build them together in the browser.</p><span class="workspace-link">Open the workbench <b>↗</b></span></a>
+            <a class="workspace-item workspace-projects" href="./projects.html"><span class="workspace-index">03 / PROJECTS</span><h3>Make something useful.</h3><p>Build bounded projects, trace a bug, and turn concepts into working code.</p><span class="workspace-link">Browse project paths <b>↗</b></span></a>
+            <a class="workspace-item workspace-systems" href="./systems.html"><span class="workspace-index">04 / WINDOWS</span><h3>Look under the surface.</h3><p>Win32, processes, memory, PE files, debugging, and system observability.</p><span class="workspace-link">Explore Windows <b>↗</b></span></a>
+            <a class="workspace-item workspace-security" href="./security.html"><span class="workspace-index">05 / SECURITY</span><h3>Defend. Test. Verify.</h3><p>Blue-team operations, authorized red-team labs, OSINT, and current advisories.</p><span class="workspace-link">Open the security desk <b>↗</b></span></a>
+            <a class="workspace-item workspace-reference" href="./reference.html"><span class="workspace-index">06 / REFERENCE</span><h3>Check the source.</h3><p>Official documentation, research tools, number conversion, and quick knowledge checks.</p><span class="workspace-link">Open reference desk <b>↗</b></span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-source-section">
+        <div class="shell source-line"><span class="source-symbol" aria-hidden="true">i</span><p>The supplied folder was a saved LearnCpp.com homepage, not a full tutorial archive. OFFSET keeps that C++ learning direction and links to the original reference, while leaving out the copied ad and analytics scripts.</p><a href="./reference.html">See references</a></div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>For people who want to know what their code is really doing.</p><span class="footer-note">Static · GitHub Pages ready</span></div></footer>
+  </body>
+</html>

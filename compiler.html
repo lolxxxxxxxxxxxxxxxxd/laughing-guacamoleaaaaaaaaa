@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101112">
+    <meta name="description" content="Write and run C or C++ in a browser compiler with standard input, command-line arguments, syntax help, and autocomplete.">
+    <title>C / C++ Compiler — OFFSET</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="./assets/js/app.js" defer></script>
+    <script src="./assets/js/editor-data.js" defer></script>
+    <script src="./assets/js/lessons-data.js" defer></script>
+    <script src="./assets/js/curriculum-data.js" defer></script>
+    <script src="./assets/js/deep-lessons-utils.js" defer></script>
+    <script src="./assets/js/deep-lessons-cpp.js" defer></script>
+    <script src="./assets/js/deep-lessons-c.js" defer></script>
+    <script src="./assets/js/deep-lessons-systems.js" defer></script>
+    <script src="./assets/js/deep-lessons-security.js" defer></script>
+    <script src="./assets/js/deep-lessons-fieldwork.js" defer></script>
+    <script src="./assets/js/deep-expansion-cpp.js" defer></script>
+    <script src="./assets/js/deep-expansion-c.js" defer></script>
+    <script src="./assets/js/deep-expansion-lowlevel.js" defer></script>
+    <script src="./assets/js/deep-expansion-windows.js" defer></script>
+    <script src="./assets/js/deep-expansion-security.js" defer></script>
+    <script src="./assets/js/deep-expansion-blue.js" defer></script>
+    <script src="./assets/js/deep-expansion-fieldwork.js" defer></script>
+    <script src="./assets/js/compiler.js" defer></script>
+    <script src="./assets/js/editor.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="main-nav" id="site-nav" aria-label="Main navigation"><a href="./index.html">Overview</a><a href="./learn.html">Learn</a><a href="./compiler.html" aria-current="page">Compiler</a><a href="./projects.html">Projects</a><a href="./systems.html">Windows</a><a href="./security.html">Security</a><a href="./reference.html">Reference</a></nav>
+      <div class="header-tools"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button><a class="header-cta" href="./projects.html">Find a project <span aria-hidden="true">↗</span></a></div>
+    </div></header>
+
+    <main id="main" class="page-main compiler-page">
+      <section class="page-intro compiler-intro"><div class="shell page-intro-grid"><div><p class="eyebrow"><span class="eyebrow-mark"></span>THE BROWSER WORKBENCH</p><h1>A small IDE,<br>ready to build.</h1></div><div><p class="page-lede">Create projects, folders, and files; switch tabs; compile multiple C/C++ source files together. Changes save in this browser. Standard input is queued before Run, just like a batch test.</p><p class="page-meta"><span>Multi-file builds</span><span>C17 / C23</span><span>C++20 / C++23</span></p></div></div></section>
+
+      <section class="section compiler-section" aria-label="C and C++ compiler">
+        <div class="shell">
+          <div class="ide-window">
+            <div class="ide-project-bar">
+              <div class="ide-project-select"><span class="ide-project-glyph" aria-hidden="true">▣</span><label for="project-select" class="visually-hidden">Current project</label><select id="project-select" aria-label="Current project"></select><span id="workspace-save-state" role="status">Saved locally</span></div>
+              <div class="ide-project-actions"><button class="ide-action" id="new-project" type="button"><span aria-hidden="true">＋</span> New project</button><button class="ide-action" id="new-file" type="button"><span aria-hidden="true">＋</span> File</button><button class="ide-action" id="new-folder" type="button"><span aria-hidden="true">＋</span> Folder</button><button class="ide-action" id="import-project" type="button">Import</button><button class="ide-action" id="export-project" type="button">Export</button><button class="ide-action ide-action-danger" id="delete-project" type="button">Delete</button><input class="visually-hidden" id="import-project-file" type="file" accept="application/json,.json" aria-label="Choose a project JSON file"></div>
+            </div>
+
+            <div class="ide-layout">
+              <aside class="ide-explorer" aria-label="Project files">
+                <div class="explorer-title"><span>EXPLORER</span><span id="explorer-project-name">WORKSPACE</span></div>
+                <div id="workspace-tree" class="workspace-tree" role="tree" aria-label="Project file tree"></div>
+                <div class="explorer-foot"><span class="local-dot" aria-hidden="true"></span> Files stay in this browser</div>
+              </aside>
+
+              <div class="ide-main">
+                <div class="compiler-toolbar">
+                  <div class="compiler-title"><span class="compiler-mark" aria-hidden="true">&gt;_</span><span><strong id="compiler-project-title">Project</strong><small id="compiler-file-label">main.cpp · GCC 15.2</small></span></div>
+                  <div class="compiler-selects">
+                    <label><span class="visually-hidden">Load code example</span><select id="example-select" aria-label="Load code example"></select></label>
+                    <label><span class="visually-hidden">Language</span><select id="language-select" aria-label="Language"><option value="cpp">C++</option><option value="c">C</option></select></label>
+                    <label><span class="visually-hidden">Language standard</span><select id="standard-select" aria-label="Language standard"></select></label>
+                  </div>
+                </div>
+
+                <div class="editor-tabs-bar"><div id="editor-tabs" class="editor-tabs" role="tablist" aria-label="Open files"></div><span class="editor-hint"><kbd>Ctrl</kbd><kbd>Space</kbd> suggestions <b>/</b> <kbd>Ctrl</kbd><kbd>Enter</kbd> build</span><button class="editor-text-button" id="reset-code" type="button">Restore snippet</button></div>
+
+                <div class="editor-wrap compiler-editor-wrap" id="editor-wrap">
+                  <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
+                  <pre class="syntax-layer" aria-hidden="true"><code id="syntax-code"></code></pre>
+                  <textarea id="code-editor" aria-label="C or C++ source code" aria-autocomplete="list" aria-controls="completion-popup" aria-expanded="false" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off">#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; "Hello from C++!\n";
+    return 0;
+}</textarea>
+                  <div class="completion-popup" id="completion-popup" role="listbox" aria-label="Code suggestions" hidden></div>
+                </div>
+
+                <div class="editor-status compiler-editor-status"><span id="editor-state">Ready</span><span id="line-count">6 lines</span><span><kbd>Tab</kbd> indent <b>/</b> <kbd>Shift+Tab</kbd> outdent</span></div>
+
+                <section class="ide-terminal" aria-label="Program input and output">
+                  <div class="terminal-titlebar"><span><i aria-hidden="true"></i> RUN &amp; DEBUG</span><span id="terminal-run-state">No recent run</span><button class="editor-text-button" id="clear-output" type="button">Clear console</button></div>
+                  <div class="terminal-grid">
+                    <div class="terminal-input-column">
+                      <div class="terminal-section-heading"><label for="stdin-input">Input queue <code>stdin</code></label><button class="editor-text-button" id="clear-input" type="button">Clear</button></div>
+                      <p class="terminal-help">Type every response before running. Put each answer on its own line; <code>cin</code>, <code>scanf</code>, and <code>getline</code> read from this queue.</p>
+                      <textarea id="stdin-input" rows="5" aria-label="Queued standard input" placeholder="Example: Ada&#10;42"></textarea>
+                      <div class="input-utilities"><button class="text-button" id="try-name-input" type="button">Try “Read a name”</button><button class="text-button" id="try-number-input" type="button">Try “Two numbers”</button></div>
+                      <label class="arguments-label" for="program-arguments">Command-line arguments</label><input id="program-arguments" type="text" placeholder="example.txt 42"><small>Use spaces or quote an argument: "two words"</small>
+                    </div>
+                    <div class="terminal-output-column">
+                      <div class="terminal-section-heading"><span>Program output</span><span class="terminal-language" id="terminal-language">C++</span></div>
+                      <pre class="compiler-output" id="compiler-output" aria-label="Program output and compiler diagnostics" aria-live="polite">Build your project to see program output or compiler diagnostics.</pre>
+                      <p class="compiler-status" id="compiler-status" data-state="idle" role="status">Ready to build.</p>
+                      <button class="button button-primary button-run" id="run-code" type="button"><span aria-hidden="true">▶</span> Build &amp; run <kbd>Ctrl + Enter</kbd></button>
+                    </div>
+                  </div>
+                  <div class="compiler-disclosure"><strong>Where a run happens</strong><p>The site stores your workspace in this browser. Build &amp; run sends the current project files, queued input, and arguments to Compiler Explorer at <a href="https://godbolt.org/" target="_blank" rel="noopener noreferrer">godbolt.org</a>. Its API runs the program to completion with the queued input; it cannot accept live keystrokes after a run starts. Do not send secrets or private code.</p></div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <p class="compiler-caption">Local browser workspace · remote GCC compiler · internet required to build and run</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>Use the playground for short examples. Use a local toolchain for real projects.</p><a class="footer-note" href="./projects.html">Build a project ↗</a></div></footer>
+
+    <dialog class="workspace-dialog" id="workspace-dialog" aria-labelledby="workspace-dialog-title">
+      <form id="workspace-form">
+        <div class="workspace-dialog-heading"><span class="dialog-symbol" aria-hidden="true">▣</span><div><p>WORKSPACE</p><h2 id="workspace-dialog-title">Create project</h2></div><button class="dialog-close" id="workspace-dialog-close" type="button" aria-label="Close dialog">×</button></div>
+        <label class="dialog-field" for="workspace-name"><span id="workspace-name-label">Project name</span><input id="workspace-name" type="text" required maxlength="64" autocomplete="off" placeholder="my-project"></label>
+        <label class="dialog-field" id="workspace-language-field" for="workspace-language"><span>Language</span><select id="workspace-language"><option value="cpp">C++</option><option value="c">C</option></select></label>
+        <label class="dialog-field" id="workspace-template-field" for="workspace-template"><span>Starting point</span><select id="workspace-template"><option value="hello">Single-file hello world</option><option value="multi">Multi-file C++ example</option><option value="empty">Empty main file</option></select></label>
+        <p class="workspace-dialog-error" id="workspace-dialog-error" role="alert" hidden></p>
+        <div class="workspace-dialog-actions"><button class="button button-secondary" id="workspace-cancel" type="button">Cancel</button><button class="button button-primary" id="workspace-submit" type="submit">Create project</button></div>
+      </form>
+    </dialog>
+  </body>
+</html>

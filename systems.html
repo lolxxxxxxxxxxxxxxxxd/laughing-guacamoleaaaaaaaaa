@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101112">
+    <meta name="description" content="Study Windows APIs, PE files, debugging, and defensive security in systems you own or have permission to inspect.">
+    <title>Windows + Security — OFFSET</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css"><script src="./assets/js/app.js" defer></script><script src="./assets/js/lessons-data.js" defer></script><script src="./assets/js/curriculum-data.js" defer></script><script src="./assets/js/systems.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="main-nav" id="site-nav" aria-label="Main navigation"><a href="./index.html">Overview</a><a href="./learn.html">Learn</a><a href="./compiler.html">Compiler</a><a href="./projects.html">Projects</a><a href="./systems.html" aria-current="page">Windows</a><a href="./security.html">Security</a><a href="./reference.html">Reference</a></nav>
+      <div class="header-tools"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button><a class="header-cta" href="./learn.html#lesson-winapi-hooking">Read the hook note <span aria-hidden="true">↗</span></a></div>
+    </div></header>
+    <main id="main" class="page-main">
+      <section class="page-intro systems-intro-page"><div class="shell page-intro-grid"><div><p class="eyebrow"><span class="eyebrow-mark"></span>UNDER THE HOOD</p><h1>Follow the call.<br>Respect the boundary.</h1></div><div><p class="page-lede">C++ makes it possible to work close to the operating system. These notes explain how Windows programs are structured and how to investigate behavior safely.</p><p class="page-meta"><span>Win32</span><span>PE / DLL</span><span>Debugging</span></p></div></div></section>
+
+      <section class="section systems-page-section"><div class="shell systems-page-layout">
+        <aside class="systems-boundary"><span class="boundary-symbol" aria-hidden="true">[!]</span><h2>Permission is part of the tooling.</h2><p>Use software you wrote, a training target, or a system you have explicit permission to inspect. Start with a local test process and keep experiments reversible.</p><a href="./learn.html#lesson-safe-lab">Open the lab checklist <span aria-hidden="true">↗</span></a></aside>
+        <div class="systems-curriculum" id="systems-curriculum" aria-live="polite"></div>
+      </div></section>
+
+      <section class="section systems-principles"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Working principles</p><h2>Observe before you modify.</h2></div><p>Prefer documented interfaces and tools that make behavior visible without changing another program's control flow.</p></div>
+        <div class="principle-list"><div><span>01</span><p><strong>Begin with supported instrumentation.</strong> Use a wrapper, dependency injection, debugger breakpoint, or documented tracing provider first.</p></div><div><span>02</span><p><strong>Test in a process you control.</strong> Keep the target local, take a snapshot when relevant, and write down the exact scope.</p></div><div><span>03</span><p><strong>Keep findings defensive.</strong> Learn how to reproduce, explain, and fix a behavior; do not use these notes to evade protections or interfere with third-party software.</p></div></div>
+      </div></section>
+    </main>
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>For authorized learning, debugging, and defensive analysis.</p><a class="footer-note" href="./reference.html">Open references ↗</a></div></footer>
+  </body>
+</html>

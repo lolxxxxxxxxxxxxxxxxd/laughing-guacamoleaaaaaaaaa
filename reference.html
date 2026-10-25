@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101112">
+    <meta name="description" content="C++ and Windows references, small coding tools, and notes about the source materials.">
+    <title>Reference + Tools — OFFSET</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css"><script src="./assets/js/app.js" defer></script><script src="./assets/js/reference.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="main-nav" id="site-nav" aria-label="Main navigation"><a href="./index.html">Overview</a><a href="./learn.html">Learn</a><a href="./compiler.html">Compiler</a><a href="./projects.html">Projects</a><a href="./systems.html">Windows</a><a href="./security.html">Security</a><a href="./reference.html" aria-current="page">Reference</a></nav>
+      <div class="header-tools"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button><a class="header-cta" href="./compiler.html">Open compiler <span aria-hidden="true">↗</span></a></div>
+    </div></header>
+    <main id="main" class="page-main">
+      <section class="page-intro"><div class="shell page-intro-grid"><div><p class="eyebrow"><span class="eyebrow-mark"></span>REFERENCE DESK</p><h1>Look it up.<br>Check your model.</h1></div><div><p class="page-lede">Use primary documentation for exact contracts and guarantees. A couple of small tools help with common C++ and systems questions.</p><p class="page-meta"><span>Official docs</span><span>Quick tools</span><span>Source notes</span></p></div></div></section>
+
+      <section class="section reference-page-section"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Reference shelf</p><h2>Good places to verify an idea.</h2></div><p>References are maintained by the language community or the platform owners. Check the version and context before relying on a detail.</p></div>
+        <div class="reference-groups">
+          <section class="reference-group"><h3>C and C++</h3><a href="https://en.cppreference.com/w/" target="_blank" rel="noopener noreferrer">cppreference <span>Language and standard library reference ↗</span></a><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines" target="_blank" rel="noopener noreferrer">C++ Core Guidelines <span>Design and usage guidance ↗</span></a><a href="https://www.learncpp.com/" target="_blank" rel="noopener noreferrer">LearnCpp.com <span>Long-form C++ tutorials ↗</span></a></section>
+          <section class="reference-group"><h3>Windows and security</h3><a href="https://learn.microsoft.com/en-us/windows/win32/" target="_blank" rel="noopener noreferrer">Windows Win32 documentation <span>APIs, processes, and platform behavior ↗</span></a><a href="https://learn.microsoft.com/en-us/cpp/" target="_blank" rel="noopener noreferrer">Microsoft C++ documentation <span>Compiler and language references ↗</span></a><a href="https://cwe.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE CWE <span>Common software weakness definitions ↗</span></a></section>
+        </div>
+      </div></section>
+
+      <section class="section tools-section"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Small utilities</p><h2>Useful while you read.</h2></div><p>These run locally in the page. The number converter accepts decimal, hexadecimal, or binary integers.</p></div>
+        <div class="reference-tools-grid">
+          <article class="tool-panel converter-panel"><div class="tool-panel-title"><span class="panel-symbol">01</span><div><h3>Number base converter</h3><p>Convert an integer without leaving the page.</p></div></div>
+            <label for="base-input">Value</label><div class="converter-input-row"><input id="base-input" type="text" value="42" autocomplete="off"><label class="visually-hidden" for="base-select">Input base</label><select id="base-select"><option value="10">Decimal</option><option value="16">Hex</option><option value="2">Binary</option></select></div>
+            <p class="converter-error" id="base-error" role="status" hidden>That value is invalid for the selected base.</p>
+            <div class="base-results" aria-live="polite"><div><span>DEC</span><code id="base-decimal">42</code></div><div><span>HEX</span><code id="base-hex">0x2A</code></div><div><span>BIN</span><code id="base-binary">101010</code></div></div>
+          </article>
+          <article class="tool-panel quiz-panel"><div class="tool-panel-title"><span class="panel-symbol">02</span><div><h3>One-minute check</h3><p>A useful C++ distinction.</p></div></div>
+            <h4>What does <code>std::move</code> do?</h4><div class="quiz-options" role="group" aria-label="Choose an answer"><button type="button" data-quiz-answer="bytes">It moves the bytes immediately.</button><button type="button" data-quiz-answer="cast">It casts to an rvalue; another operation may move.</button><button type="button" data-quiz-answer="copy">It always makes a copy.</button></div>
+            <p class="quiz-feedback" id="quiz-feedback" aria-live="polite">Choose an answer to see the explanation.</p><button class="text-button" id="quiz-reset" type="button" hidden>Try again</button>
+          </article>
+        </div>
+      </div></section>
+
+      <section class="source-note-section"><div class="shell source-note"><span class="source-symbol" aria-hidden="true">i</span><div><h2>About the supplied source</h2><p>The `sa-com` folder was a saved LearnCpp.com homepage and WordPress assets; it did not include the tutorial lesson pages. OFFSET keeps the original C++ learning goal, adds new lesson notes and projects, and links back to LearnCpp.com. Advertising and analytics scripts from the capture are not included.</p></div></div></section>
+    </main>
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>Use the docs to verify details against your compiler and platform.</p><a class="footer-note" href="./learn.html">Back to lessons ↗</a></div></footer>
+  </body>
+</html>

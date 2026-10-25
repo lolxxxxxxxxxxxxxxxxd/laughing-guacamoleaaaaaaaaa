@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101112">
+    <meta name="description" content="Long-form C/C++, low-level, Windows, security, red-team, blue-team, and OSINT study modules.">
+    <title>Learning Library — OFFSET</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="./assets/js/app.js" defer></script>
+    <script src="./assets/js/lessons-data.js" defer></script>
+    <script src="./assets/js/curriculum-data.js" defer></script>
+    <script src="./assets/js/deep-lessons-utils.js" defer></script>
+    <script src="./assets/js/deep-lessons-cpp.js" defer></script>
+    <script src="./assets/js/deep-lessons-c.js" defer></script>
+    <script src="./assets/js/deep-lessons-systems.js" defer></script>
+    <script src="./assets/js/deep-lessons-security.js" defer></script>
+    <script src="./assets/js/deep-lessons-fieldwork.js" defer></script>
+    <script src="./assets/js/deep-expansion-cpp.js" defer></script>
+    <script src="./assets/js/deep-expansion-c.js" defer></script>
+    <script src="./assets/js/deep-expansion-lowlevel.js" defer></script>
+    <script src="./assets/js/deep-expansion-windows.js" defer></script>
+    <script src="./assets/js/deep-expansion-security.js" defer></script>
+    <script src="./assets/js/deep-expansion-blue.js" defer></script>
+    <script src="./assets/js/deep-expansion-fieldwork.js" defer></script>
+    <script src="./assets/js/learn.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="main-nav" id="site-nav" aria-label="Main navigation"><a href="./index.html">Overview</a><a href="./learn.html" aria-current="page">Learn</a><a href="./compiler.html">Compiler</a><a href="./projects.html">Projects</a><a href="./systems.html">Windows</a><a href="./security.html">Security</a><a href="./reference.html">Reference</a></nav>
+      <div class="header-tools"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button><a class="header-cta" href="./compiler.html">Open compiler <span aria-hidden="true">↗</span></a></div>
+    </div></header>
+
+    <main id="main" class="page-main">
+      <section class="page-intro"><div class="shell page-intro-grid"><div><p class="eyebrow"><span class="eyebrow-mark"></span>THE LEARNING LIBRARY</p><h1>Go from source<br>to system.</h1></div><div><p class="page-lede">Follow structured modules through C and C++, low-level computing, Windows, defensive security, authorized red-team methodology, and OSINT. Search a concept or choose a track.</p><p class="page-meta"><span id="lesson-total">Loading modules</span><span id="track-total">8 tracks</span><span>Self-paced · locally saved</span></p></div></div></section>
+
+      <section class="section learn-section" id="course" aria-labelledby="course-title">
+        <div class="shell">
+          <div class="lesson-controls">
+            <div class="filter-group track-filters" id="track-filters" role="group" aria-label="Filter modules by learning track"></div>
+            <label class="search-field"><span class="search-glass" aria-hidden="true"></span><span class="visually-hidden">Search modules</span><input id="lesson-search" type="search" placeholder="Find a concept" autocomplete="off"><kbd>/</kbd></label>
+          </div>
+
+          <div class="learn-layout">
+            <section class="lesson-index" aria-labelledby="course-title">
+              <div class="list-heading"><div><h2 id="course-title" tabindex="-1">All modules</h2><p id="track-summary">Choose a learning track or search across the whole library.</p></div><span id="visible-count">0 modules</span></div>
+              <div class="lesson-grid" id="lesson-grid" aria-live="polite"></div>
+              <p class="empty-state" id="empty-state" hidden>No modules match that search. Try another term.</p>
+            </section>
+            <aside class="progress-panel" aria-labelledby="progress-title">
+              <p class="progress-label-top"><span class="progress-marker" aria-hidden="true"></span> Your progress</p>
+              <h3 id="progress-title">Pick it up<br>when you like.</h3>
+              <p class="progress-copy">Saved in this browser. No account, streak, or deadline.</p>
+              <div class="progress-meter" role="progressbar" aria-label="Library progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span class="progress-fill" id="progress-fill"></span></div>
+              <div class="progress-numbers"><strong id="progress-count">0 modules</strong><span id="progress-percent">0%</span></div>
+              <button class="button button-progress" id="continue-learning" type="button">Start learning</button>
+              <p class="progress-note">Mark modules complete to track your path on this device.</p>
+            </aside>
+          </div>
+          <section class="lesson-reader" id="lesson-reader" aria-live="polite" tabindex="-1" hidden></section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>Study notes and lab prompts across eight tracks; references are linked where they add depth.</p><a class="footer-note" href="./security.html">Security desk ↗</a></div></footer>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101112">
+    <meta name="description" content="Learn defensive security, authorized red-team methodology, blue-team operations, OSINT, and current security advisories.">
+    <title>Security Desk — OFFSET</title>
+    <script>try{const saved=localStorage.getItem("offset.theme");if(saved==="light"||saved==="dark")document.documentElement.dataset.theme=saved}catch{}</script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <script src="./assets/js/app.js" defer></script><script src="./assets/js/lessons-data.js" defer></script><script src="./assets/js/curriculum-data.js" defer></script><script src="./assets/js/security.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header"><div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="OFFSET home"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="main-nav" id="site-nav" aria-label="Main navigation"><a href="./index.html">Overview</a><a href="./learn.html">Learn</a><a href="./compiler.html">Compiler</a><a href="./projects.html">Projects</a><a href="./systems.html">Windows</a><a href="./security.html" aria-current="page">Security</a><a href="./reference.html">Reference</a></nav>
+      <div class="header-tools"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false"><span id="theme-icon" aria-hidden="true">◐</span><span id="theme-label">Light theme</span></button><a class="header-cta" href="./learn.html?track=blue-team">Start a course <span aria-hidden="true">↗</span></a></div>
+    </div></header>
+
+    <main id="main" class="page-main security-page">
+      <section class="page-intro security-intro"><div class="shell page-intro-grid"><div><p class="eyebrow"><span class="eyebrow-mark"></span>SECURITY DESK</p><h1>Test with permission.<br>Defend with evidence.</h1></div><div><p class="page-lede">Build a security foundation, study authorized assessment methods, learn how defenders investigate, and use OSINT responsibly. Every lab path starts with clear scope.</p><p class="page-meta"><span>Red team</span><span>Blue team</span><span>OSINT</span><span>Live-source links</span></p></div></div></section>
+
+      <section class="section security-path-section" id="security-paths"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Choose a practice path</p><h2>Three roles. One safety boundary.</h2></div><p>These are learning routes, not permission to test a live target. Use local labs, synthetic data, or systems explicitly assigned to you.</p></div>
+        <div class="security-path-grid">
+          <article class="security-path path-blue" data-security-track="blue-team"><div class="security-path-top"><span class="path-index">DEFEND / DETECT / RESPOND</span><span class="path-count" id="count-blue-team">— modules</span></div><h3>Blue team</h3><p>Read telemetry, triage endpoint and network signals, write detections, harden systems, and practice incident response.</p><div class="security-module-list" id="modules-blue-team"></div><a class="path-cta" href="./learn.html?track=blue-team">Open blue-team modules <span aria-hidden="true">↗</span></a></article>
+          <article class="security-path path-red" data-security-track="red-team"><div class="security-path-top"><span class="path-index">SCOPE / VALIDATE / REPORT</span><span class="path-count" id="count-red-team">— modules</span></div><h3>Authorized testing</h3><p>Learn engagement planning, attack-surface review, safe training labs, minimal validation, and clear reporting.</p><div class="security-module-list" id="modules-red-team"></div><a class="path-cta" href="./learn.html?track=red-team">Open red-team modules <span aria-hidden="true">↗</span></a></article>
+          <article class="security-path path-osint" data-security-track="osint"><div class="security-path-top"><span class="path-index">COLLECT / VERIFY / MINIMIZE</span><span class="path-count" id="count-osint">— modules</span></div><h3>OSINT</h3><p>Research public sources with provenance, privacy review, careful attribution, and a clear stop condition.</p><div class="security-module-list" id="modules-osint"></div><a class="path-cta" href="./learn.html?track=osint">Open OSINT modules <span aria-hidden="true">↗</span></a></article>
+        </div>
+        <div class="security-boundary-note"><span aria-hidden="true">!</span><p><strong>Permission is non-negotiable.</strong> Do not scan, access, or test accounts, devices, domains, or networks unless you own them or have explicit authorization. No course here teaches evasion or access to third-party systems.</p><a href="./learn.html?track=security">Start with security fundamentals ↗</a></div>
+      </div></section>
+
+      <section class="section signal-section"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Current signals</p><h2>Follow the advisories, not the hype.</h2></div><p>These links point to maintained advisories and reporting desks so the page stays useful without pretending a static snapshot is live news.</p></div>
+        <div class="signal-layout">
+          <div class="signal-column"><h3>Official advisories &amp; vulnerability data</h3>
+            <a class="signal-link" href="https://www.cisa.gov/news-events/cybersecurity-advisories" target="_blank" rel="noopener noreferrer"><span>CISA Cybersecurity Advisories</span><small>Official incident and threat advisories</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer"><span>Known Exploited Vulnerabilities catalog</span><small>CISA's prioritized KEV list</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://nvd.nist.gov/" target="_blank" rel="noopener noreferrer"><span>NIST National Vulnerability Database</span><small>CVE records and enrichment</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer"><span>MITRE ATT&amp;CK</span><small>Behavior knowledge base for defense and assessment</small><b aria-hidden="true">↗</b></a>
+          </div>
+          <div class="signal-column"><h3>Reporting &amp; research desks</h3>
+            <a class="signal-link" href="https://therecord.media/" target="_blank" rel="noopener noreferrer"><span>The Record</span><small>Cybersecurity and digital policy reporting</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://krebsonsecurity.com/" target="_blank" rel="noopener noreferrer"><span>Krebs on Security</span><small>Investigative security journalism</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://www.bleepingcomputer.com/" target="_blank" rel="noopener noreferrer"><span>BleepingComputer</span><small>Security incidents, vulnerability, and malware news</small><b aria-hidden="true">↗</b></a>
+            <a class="signal-link" href="https://isc.sans.edu/" target="_blank" rel="noopener noreferrer"><span>SANS Internet Storm Center</span><small>Daily handler diaries and defensive observations</small><b aria-hidden="true">↗</b></a>
+          </div>
+        </div>
+        <p class="signal-footnote">OFFSET does not republish headlines or imply endorsement. Check the source, date, affected versions, and remediation guidance before acting.</p>
+      </div></section>
+
+      <section class="section security-reference-section"><div class="shell">
+        <div class="section-heading"><div><p class="section-kicker">Training grounds</p><h2>Practice where practice is expected.</h2></div><p>Start with intentionally vulnerable applications and structured training. Read each platform's rules and use only its designated targets.</p></div>
+        <div class="training-links"><a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer"><strong>PortSwigger Web Security Academy</strong><span>Free web security lessons and labs ↗</span></a><a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener noreferrer"><strong>OWASP Juice Shop</strong><span>Intentionally vulnerable app for local training ↗</span></a><a href="https://bellingcat.gitbook.io/toolkit" target="_blank" rel="noopener noreferrer"><strong>Bellingcat Online Investigation Toolkit</strong><span>OSINT research methods and tools ↗</span></a><a href="https://osintframework.com/" target="_blank" rel="noopener noreferrer"><strong>OSINT Framework</strong><span>Directory of public-source research resources ↗</span></a></div>
+      </div></section>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="./index.html"><span class="brand-mark">O<span>.</span></span><span class="brand-copy"><strong>OFFSET</strong><small>Learn from the source.</small></span></a><p>Security education should leave systems and people safer than it found them.</p><a class="footer-note" href="./learn.html?track=security">Study the fundamentals ↗</a></div></footer>
+  </body>
+</html>
