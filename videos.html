@@ -4,275 +4,420 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Stash</title>
-
+<title>Video Library</title>
 <style>
-* {
-    box-sizing: border-box;
+:root {
+  --bg: #080b14;
+  --panel: #101625;
+  --panel2: #151d30;
+  --border: #25304a;
+  --text: #edf0ff;
+  --muted: #8e9bb8;
+  --purple: #665cff;
 }
-
+* { box-sizing: border-box; }
 body {
-    margin: 0;
-    padding: 35px;
-    background: #0b0b10;
-    color: #eeeef5;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px Arial, sans-serif;
 }
-
-h1 {
-    margin-bottom: 5px;
-    font-size: 34px;
+button, input { font: inherit; }
+button { cursor: pointer; }
+header {
+  padding: 22px 5%;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
-
-h1 span {
-    color: #a78bfa;
+.brand { font-size: 23px; font-weight: 800; }
+.brand span { color: var(--purple); }
+header p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+.layout {
+  max-width: 1450px;
+  margin: auto;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 22px;
 }
-
-p {
-    color: #9292a8;
+main { min-width: 0; }
+.panel {
+  background: linear-gradient(145deg, var(--panel), #0c1220);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 22px;
+  margin-bottom: 20px;
 }
-
-.container {
-    max-width: 1100px;
-    margin: auto;
+h2 { margin: 0 0 7px; font-size: 19px; }
+.sub { color: var(--muted); margin: 0 0 17px; }
+.add-row { display: flex; gap: 10px; }
+input {
+  width: 100%;
+  min-width: 0;
+  background: #080e1b;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: white;
+  padding: 14px;
+  outline: none;
 }
-
-.input-area {
-    margin: 25px 0;
-    padding: 20px;
-    background: #15151f;
-    border: 1px solid #292938;
-    border-radius: 12px;
+input:focus { border-color: var(--purple); }
+.btn {
+  background: var(--purple);
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 17px;
+  font-weight: 700;
+  white-space: nowrap;
 }
-
-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 12px;
-    resize: vertical;
-    background: #0c0c13;
-    color: white;
-    border: 1px solid #353547;
-    border-radius: 8px;
-    font: inherit;
+.btn:hover { filter: brightness(1.15); }
+.btn.secondary {
+  background: var(--panel2);
+  border: 1px solid var(--border);
 }
-
-button {
-    margin-top: 10px;
-    padding: 10px 16px;
-    background: #7c3aed;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 14px;
+.actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
+.status { color: var(--muted); font-size: 13px; margin-top: 12px; }
+.player {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: #050812;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
 }
-
-button:hover {
-    background: #8b5cf6;
+.player iframe { width: 100%; height: 100%; border: 0; }
+.now-title { font-size: 19px; font-weight: 700; margin: 15px 0 6px; }
+.now-url { color: var(--muted); overflow-wrap: anywhere; font-size: 12px; }
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 27px 2px 15px;
 }
-
-#videos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 18px;
+.section-head h2 { margin: 0; }
+#search { max-width: 250px; padding: 10px 12px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 14px;
 }
-
-.video {
-    overflow: hidden;
-    background: #15151f;
-    border: 1px solid #292938;
-    border-radius: 12px;
+.video-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--panel);
 }
-
-.video iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
+.thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  object-fit: cover;
+  background: #10192b;
+  cursor: pointer;
 }
-
-.video-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 12px;
+.card-body { padding: 12px; }
+.card-title {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  margin-bottom: 11px;
 }
-
-.video-info a {
-    color: #a78bfa;
-    text-decoration: none;
-    font-size: 13px;
+.card-actions { display: flex; gap: 7px; }
+.card-actions button { flex: 1; padding: 8px 5px; font-size: 12px; }
+.empty {
+  padding: 28px 12px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  grid-column: 1/-1;
 }
-
-.video-info button {
-    margin: 0;
-    padding: 7px 10px;
-    background: #29202d;
-    color: #fda4af;
+.side-title { font-weight: 700; margin-bottom: 12px; }
+.side-link {
+  width: 100%;
+  text-align: left;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
-
-#status {
-    color: #a78bfa;
-    font-size: 13px;
-    margin-top: 10px;
+.side-link:last-child { border-bottom: 0; }
+.note { color: var(--muted); font-size: 13px; }
+footer { text-align: center; color: var(--muted); padding: 20px; font-size: 12px; }
+@media(max-width:950px) {
+  .layout { grid-template-columns: 1fr; padding: 15px; }
+  aside { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  aside .panel { margin: 0; }
 }
-
-@media (max-width: 500px) {
-    body {
-        padding: 18px;
-    }
+@media(max-width:650px) {
+  header { padding: 17px; }
+  .layout { padding: 12px; }
+  .panel { padding: 15px; }
+  .add-row { flex-direction: column; }
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  aside { display: block; }
+  aside .panel { margin-bottom: 12px; }
+  .section-head { align-items: stretch; flex-direction: column; }
+  #search { max-width: none; }
+}
+@media(max-width:390px) {
+  .grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
-
 <body>
-<div class="container">
-    <h1>video stash<span>.</span></h1>
-    <p>Save YouTube links and watch them here whenever you want.</p>
+<header>
+  <div>
+    <div class="brand"><span>▶</span> Video Library</div>
+    <p>Your videos, organized in one place.</p>
+  </div>
+  <div style="color:#8ce9b8;font-size:12px">● Local library</div>
+</header>
 
-    <div class="input-area">
-        <textarea id="links" placeholder="Paste YouTube links here, one per line..."></textarea>
-        <button onclick="addVideos()">Add videos</button>
-        <button onclick="document.getElementById('links').value=''"
-                style="background:#292938">Clear</button>
-        <div id="status"></div>
+<div class="layout">
+<main>
+  <section class="panel">
+    <h2>Add a video</h2>
+    <p class="sub">Paste a YouTube link to play it or save it to your library.</p>
+    <div class="add-row">
+      <input id="url" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
+      <button class="btn" id="load">Get video</button>
     </div>
+    <div class="actions">
+      <button class="btn secondary" id="watch">▶ Watch video</button>
+      <button class="btn" id="save">＋ Save to library</button>
+    </div>
+    <div class="status" id="status" aria-live="polite">Videos are saved in this browser on this device.</div>
+  </section>
 
-    <h2>Saved videos</h2>
-    <div id="videos"></div>
+  <section class="panel">
+    <div class="player" id="player">
+      <div style="height:100%;display:grid;place-items:center;color:#8998ba">
+        Paste a YouTube link above to start watching
+      </div>
+    </div>
+    <div class="now-title" id="nowTitle">Nothing playing</div>
+    <div class="now-url" id="nowUrl"></div>
+  </section>
+
+  <div class="section-head">
+    <h2>Your library</h2>
+    <input id="search" placeholder="Search saved videos..." aria-label="Search saved videos">
+  </div>
+  <div class="grid" id="library"></div>
+</main>
+
+<aside>
+  <section class="panel">
+    <div class="side-title">Your library</div>
+    <p class="note"><strong id="count">0</strong> saved videos</p>
+    <button class="side-link" id="export">↗ Export library backup</button>
+    <button class="side-link" id="importBtn">↙ Import library backup</button>
+    <input id="importFile" type="file" accept="application/json,.json" hidden>
+    <button class="side-link" id="clear">⌫ Clear library</button>
+  </section>
+  <section class="panel">
+    <div class="side-title">How it works</div>
+    <p class="note">Save links and play embedded videos directly on this page. Your list is stored in this browser.</p>
+    <p class="note">The library does not upload or download video files. Some videos may block embedding.</p>
+    <p class="note">To use the same library on another device, export a backup here and import it there.</p>
+  </section>
+</aside>
 </div>
+<footer>Built for focus · Watch anywhere · Your media, your rules</footer>
 
 <script>
-const storageKey = "video-stash-videos-html";
-let saved = [];
+const $ = id => document.getElementById(id);
+const KEY = "video-library-v2";
+let videos = loadLibrary();
+let currentId = null;
 
-try {
-    saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    if (!Array.isArray(saved)) saved = [];
-} catch {
-    saved = [];
+function loadLibrary() {
+  try {
+    const value = JSON.parse(localStorage.getItem(KEY) || "[]");
+    return Array.isArray(value) ? value.filter(v => v && v.id && v.url) : [];
+  } catch { return []; }
 }
 
-function getId(link) {
-    try {
-        const url = new URL(link);
-        const host = url.hostname.replace(/^(www\.|m\.)/, "");
-        let id = "";
-
-        if (host === "youtu.be") {
-            id = url.pathname.split("/").filter(Boolean)[0] || "";
-        } else if (host === "youtube.com" ||
-                   host === "youtube-nocookie.com") {
-            if (url.pathname === "/watch") {
-                id = url.searchParams.get("v") || "";
-            } else {
-                const parts = url.pathname.split("/").filter(Boolean);
-                if (["embed", "shorts", "live"].includes(parts[0])) {
-                    id = parts[1] || "";
-                }
-            }
-        }
-
-        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
-    } catch {
-        return null;
-    }
+function saveLibrary() {
+  localStorage.setItem(KEY, JSON.stringify(videos));
+  renderLibrary();
 }
 
-function addVideos() {
-    const input = document.getElementById("links");
-    const status = document.getElementById("status");
-    const links = input.value.split(/\s+/).filter(Boolean);
-
-    if (!links.length) {
-        status.textContent = "Paste a link first.";
-        return;
-    }
-
-    let added = 0;
-    let invalid = 0;
-
-    for (const link of links) {
-        const id = getId(link);
-
-        if (!id) {
-            invalid++;
-            continue;
-        }
-
-        if (saved.some(video => video.id === id)) continue;
-
-        saved.unshift({ id });
-        added++;
-    }
-
-    localStorage.setItem(storageKey, JSON.stringify(saved));
-    input.value = "";
-    render();
-
-    status.textContent = `${added} video(s) added.` +
-        (invalid ? ` ${invalid} invalid link(s) skipped.` : "");
+function extractVideoId(raw) {
+  try {
+    const u = new URL(raw.trim());
+    const host = u.hostname.toLowerCase().replace(/^www\./, "").replace(/^m\./, "");
+    let id = "";
+    if (host === "youtu.be") id = u.pathname.split("/").filter(Boolean)[0] || "";
+    else if (host === "youtube.com" || host === "youtube-nocookie.com") {
+      if (u.pathname === "/watch") id = u.searchParams.get("v") || "";
+      else {
+        const parts = u.pathname.split("/").filter(Boolean);
+        if (["embed", "shorts", "live", "v"].includes(parts[0])) id = parts[1] || "";
+      }
+    } else return null;
+    return /^[\w-]{11}$/.test(id) ? id : null;
+  } catch { return null; }
 }
 
-function removeVideo(id) {
-    saved = saved.filter(video => video.id !== id);
-    localStorage.setItem(storageKey, JSON.stringify(saved));
-    render();
+function getInputVideo() {
+  const url = $("url").value.trim();
+  const id = extractVideoId(url);
+  if (!id) {
+    $("status").textContent = "Enter a valid YouTube video URL.";
+    return null;
+  }
+  return {
+    id, url: "https://www.youtube.com/watch?v=" + id,
+    title: "YouTube video " + id,
+    thumbnail: "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"
+  };
 }
 
-function render() {
-    const container = document.getElementById("videos");
-    container.replaceChildren();
-
-    if (!saved.length) {
-        container.textContent = "No videos saved yet.";
-        container.style.color = "#9292a8";
-        return;
-    }
-
-    container.style.color = "";
-
-    for (const video of saved) {
-        const card = document.createElement("div");
-        card.className = "video";
-
-        const frame = document.createElement("iframe");
-        frame.src = `https://www.youtube-nocookie.com/embed/${video.id}`;
-        frame.title = "YouTube video";
-        frame.loading = "lazy";
-        frame.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        frame.allowFullscreen = true;
-        frame.referrerPolicy = "strict-origin-when-cross-origin";
-
-        const info = document.createElement("div");
-        info.className = "video-info";
-
-        const link = document.createElement("a");
-        link.href = `https://www.youtube.com/watch?v=${video.id}`;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Open on YouTube ↗";
-
-        const remove = document.createElement("button");
-        remove.textContent = "Remove";
-        remove.onclick = () => removeVideo(video.id);
-
-        info.append(link, remove);
-        card.append(frame, info);
-        container.append(card);
-    }
+function play(video) {
+  currentId = video.id;
+  $("player").innerHTML = "";
+  const frame = document.createElement("iframe");
+  frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(video.id);
+  frame.title = video.title;
+  frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  frame.allowFullscreen = true;
+  frame.referrerPolicy = "strict-origin-when-cross-origin";
+  $("player").appendChild(frame);
+  $("nowTitle").textContent = video.title;
+  $("nowUrl").textContent = video.url;
+  $("url").value = video.url;
+  $("status").textContent = "Playing embedded video. Some videos do not allow embedding.";
 }
 
-document.getElementById("links").addEventListener("keydown", event => {
-    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
-        addVideos();
-    }
+function loadVideo() {
+  const video = getInputVideo();
+  if (!video) return;
+  const saved = videos.find(v => v.id === video.id);
+  if (saved) video.title = saved.title;
+  play(video);
+  $("status").textContent = "Video link recognized. The title may be edited after saving.";
+}
+
+function saveCurrent() {
+  const video = getInputVideo();
+  if (!video) return;
+  const existing = videos.find(v => v.id === video.id);
+  if (existing) {
+    $("status").textContent = "That video is already in your library.";
+    play(existing);
+    return;
+  }
+  videos.unshift(video);
+  saveLibrary();
+  play(video);
+  $("status").textContent = "Saved to this browser's library.";
+}
+
+function renderLibrary() {
+  const query = $("search").value.trim().toLowerCase();
+  const shown = videos.filter(v => v.title.toLowerCase().includes(query) || v.url.toLowerCase().includes(query));
+  $("count").textContent = videos.length;
+  $("library").innerHTML = "";
+  if (!shown.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = videos.length ? "No videos match your search." : "Your library is empty. Paste a link above and save your first video.";
+    $("library").appendChild(empty);
+    return;
+  }
+  shown.forEach(video => {
+    const card = document.createElement("article");
+    card.className = "video-card";
+    const img = document.createElement("img");
+    img.className = "thumb";
+    img.src = video.thumbnail || "https://i.ytimg.com/vi/" + video.id + "/hqdefault.jpg";
+    img.alt = video.title;
+    img.loading = "lazy";
+    img.addEventListener("click", () => play(video));
+    img.addEventListener("error", () => { img.style.display = "none"; });
+    const body = document.createElement("div");
+    body.className = "card-body";
+    const title = document.createElement("div");
+    title.className = "card-title";
+    title.textContent = video.title;
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+    const watch = document.createElement("button");
+    watch.className = "btn";
+    watch.textContent = "▶ Play";
+    watch.addEventListener("click", () => play(video));
+    const remove = document.createElement("button");
+    remove.className = "btn secondary";
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => {
+      videos = videos.filter(v => v.id !== video.id);
+      saveLibrary();
+      $("status").textContent = "Removed from your library.";
+    });
+    actions.append(watch, remove);
+    body.append(title, actions);
+    card.append(img, body);
+    $("library").appendChild(card);
+  });
+}
+
+$("load").addEventListener("click", loadVideo);
+$("watch").addEventListener("click", loadVideo);
+$("save").addEventListener("click", saveCurrent);
+$("url").addEventListener("keydown", e => { if (e.key === "Enter") loadVideo(); });
+$("search").addEventListener("input", renderLibrary);
+
+$("export").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(videos, null, 2)], {type:"application/json"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "video-library-backup.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
 });
 
-render();
+$("importBtn").addEventListener("click", () => $("importFile").click());
+$("importFile").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const imported = JSON.parse(await file.text());
+    if (!Array.isArray(imported)) throw new Error("The backup must contain a list of videos.");
+    const valid = imported.filter(v => v && typeof v.url === "string" && extractVideoId(v.url));
+    valid.forEach(v => {
+      const id = extractVideoId(v.url);
+      if (!videos.some(old => old.id === id)) {
+        videos.push({
+          id, url: "https://www.youtube.com/watch?v=" + id,
+          title: typeof v.title === "string" ? v.title : "YouTube video " + id,
+          thumbnail: "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg"
+        });
+      }
+    });
+    saveLibrary();
+    $("status").textContent = "Backup imported.";
+  } catch (err) {
+    $("status").textContent = "Could not import backup: " + err.message;
+  }
+  e.target.value = "";
+});
+
+$("clear").addEventListener("click", () => {
+  if (!confirm("Remove every saved video from this browser?")) return;
+  videos = [];
+  saveLibrary();
+  $("status").textContent = "Library cleared.";
+});
+
+renderLibrary();
 </script>
 </body>
 </html>
